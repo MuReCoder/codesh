@@ -22,8 +22,8 @@ class sh:
         app.jData
     """
     def __init__(self, username):
-        self.checkFile = lambda file: path.exists(file)
-        self.parseFile = lambda file: path.splitext(file)
+        self.checkFile = path.exists
+        self.parseFile = path.splitext
         self.username = username
 
         self.jsonFile = path.join(environ['HOME'], "codesh.json")
@@ -49,7 +49,31 @@ class sh:
             ".sh": "bash",
             ".go": "go",
             ".html": "html",
-            ".js": "js"
+            ".js": "js",
+            ".clj": "clojure",
+            ".rkt": "racket",
+            ".java": "java",
+            ".bat": "batch",
+            ".cljs": "clojure",
+            ".c": "C",
+            "Makefile": "Makefile",
+            ".lisp": "Common lisp",
+            ".html": "HTML",
+            ".coffee": "CoffeScript",
+            ".cpp": "C++",
+            ".h": "C",
+            ".cs": "C#",
+            ".fsx" "F#",
+            ".ml": "OCaml",
+            ".mli": "OCaml",
+            ".go": "Go",
+            ".hs": "Haskell",
+            ".lua": "Lua",
+            ".css": "CSS",
+            ".scm": "Scheme",
+            ".vim": "VimL",
+            ".vimrc": "VimL",
+            ".scala": "Scala"
         }.get(lang, "text")
 
     def share(self, file):
@@ -80,12 +104,12 @@ if __name__ == "__main__":
     app = sh(username=environ['USER'])
 
     if len(argv) == 1:
-        print("Using:")
-        print("\t~$ python codesh.py [*files]")
-        print("\t~$ python codesh.py --list (List Of Last Shares)")
+        print("Usage:")
+        print("  $ python codesh.py [*files]")
+        print("  $ python codesh.py --list (List Of Last Shares)")
         print("\nModule Usage:")
-        print("\tfrom codesh import sh\n\tapp = sh(username='nickname')\n\tapp.main('filename.txt')")
-        print("\n\tapp.jData # this object returns the last link list")
+        print("  from codesh import sh\n\tapp = sh(username='nickname')\n\tapp.main('filename.txt')")
+        print("\n  app.jData # this object returns the last link list")
     else:
         if argv[1] == "--list":
             for i in app.jData:
